@@ -1,0 +1,1079 @@
+/* =========================================
+   CLIMA APP - SISTEMA DE DISEÑO Y ESTILOS
+   =========================================
+   Hoja de estilos completa para aplicación de clima
+   Utiliza metodología BEM y variables CSS
+*/
+
+/* Reset y estilos base 
+   - Normaliza los estilos para todos los elementos
+   - Define variables globales para colores, sombras, etc.
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sistema de diseño con variables CSS
+   - Colores principales y secundarios de la aplicación
+   - Esquema de colores para estados y notificaciones
+   - Efectos de sombra y bordes redondeados
+   - Transiciones para animaciones suaves
+*/
+:root {
+    --color-primary: #3498db;
+    --color-primary-dark: #2980b9;
+    --color-secondary: #2c3e50;
+    --color-light: #ecf0f1;
+    --color-dark: #34495e;
+    --color-success: #2ecc71;
+    --color-warning: #f39c12;
+    --color-danger: #e74c3c;
+    --color-info: #3498db;
+    --color-text: #333;
+    --color-text-light: #7f8c8d;
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* Estilos generales del cuerpo del documento
+   - Tipografía principal y tamaño de línea
+   - Color de texto y fondo por defecto
+*/
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* =========================================
+   ESTRUCTURA PRINCIPAL - LAYOUT
+   =========================================
+*/
+
+/* Contenedor principal de la aplicación
+   - Estructura base que contiene todo el contenido
+   - Asegura altura mínima completa de la ventana
+*/
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenedor para limitar el ancho y centrar el contenido
+   - Proporciona márgenes automáticos y padding consistente
+*/
+.app__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* =========================================
+   ENCABEZADO Y NAVEGACIÓN
+   =========================================
+*/
+
+/* Encabezado principal de la aplicación
+   - Fondo de color primario con texto blanco
+   - Fijado en la parte superior con z-index alto
+   - Sombra para crear efecto de elevación
+*/
+.header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+/* Contenedor flexible para distribuir elementos del encabezado
+   - Logo a la izquierda, navegación a la derecha
+*/
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilos para el logo de la aplicación
+   - Tamaño de texto más grande y negritas
+   - Alineación con posibles íconos
+*/
+.header__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+/* Ícono junto al texto del logo
+   - Espacio entre el ícono y el texto
+   - Tamaño ligeramente mayor que el texto
+*/
+.header__logo-icon {
+    margin-right: 0.5rem;
+    font-size: 1.8rem;
+}
+
+/* Contenedor de navegación principal
+   - Estructura flexible para los elementos del menú
+*/
+.header__nav {
+    display: flex;
+}
+
+/* Lista de elementos de navegación
+   - Elimina viñetas y aplica flexbox para alinear horizontalmente
+*/
+.nav__list {
+    display: flex;
+    list-style: none;
+}
+
+/* Elementos individuales del menú
+   - Espacio uniforme entre elementos
+*/
+.nav__item {
+    margin-left: 1.5rem;
+}
+
+/* Enlaces de navegación
+   - Sin subrayado y color blanco
+   - Transición suave para efectos hover
+   - Posición relativa para animación del subrayado
+*/
+.nav__link {
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+/* Pseudo-elemento para crear el efecto de subrayado animado
+   - Inicialmente invisible (ancho 0)
+   - Se expande al pasar el cursor (hover)
+*/
+.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+/* Estado hover y activo de los enlaces
+   - Muestra el subrayado completo (ancho 100%)
+*/
+.nav__link:hover::after,
+.nav__link--active::after {
+    width: 100%;
+}
+
+/* Estilo para el enlace de la página actual
+   - Negritas para destacar la sección activa
+*/
+.nav__link--active {
+    font-weight: bold;
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+   =========================================
+*/
+
+/* Contenedor principal del contenido
+   - Ocupa todo el espacio disponible (flex: 1)
+   - Padding vertical para separar del header y footer
+*/
+.main {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+/* =========================================
+   DASHBOARD - PANEL PRINCIPAL
+   =========================================
+*/
+
+/* Estructura del dashboard en grid
+   - Columna principal y barra lateral
+   - Espacio adecuado entre componentes
+*/
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Ajuste responsive para pantallas medianas y pequeñas
+   - Cambia a una sola columna en dispositivos móviles
+*/
+@media (max-width: 992px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   TARJETA DEL CLIMA ACTUAL
+   =========================================
+*/
+
+/* Contenedor principal de la tarjeta de clima
+   - Fondo blanco con bordes redondeados y sombra
+   - Estructura vertical con flex
+*/
+.weather-card {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado de la tarjeta con título y botón de actualización
+   - Distribución flexible entre título y botón
+*/
+.weather-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+/* Título principal de la tarjeta
+   - Tamaño y color destacados
+*/
+.weather-card__title {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Subtítulo con información adicional (ubicación)
+   - Texto más pequeño y color claro
+*/
+.weather-card__subtitle {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+/* Sección de última actualización
+   - Alineado a la derecha con texto pequeño
+*/
+.weather-card__update {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+}
+
+/* Botón para actualizar datos del clima
+   - Estilo minimalista sin bordes
+   - Cursor pointer para indicar interactividad
+*/
+.weather-card__refresh {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+/* Ícono de actualización junto al texto
+   - Espacio entre ícono y texto
+*/
+.weather-card__refresh-icon {
+    margin-right: 0.3rem;
+}
+
+/* Sección principal con temperatura y estado del clima
+   - Centrado horizontal y vertical
+   - Margen inferior para separar de los detalles
+*/
+.weather-card__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+/* Temperatura actual destacada
+   - Tamaño grande, negritas y color destacado
+*/
+.weather-card__temp {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin-right: 1rem;
+}
+
+/* Ícono representativo del clima actual
+   - Tamaño grande y color primario
+*/
+.weather-card__icon {
+    font-size: 4rem;
+    color: var(--color-primary);
+}
+
+/* Rejilla para detalles adicionales del clima
+   - Distribución automática según el espacio disponible
+*/
+.weather-card__details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+/* =========================================
+   DETALLES DEL CLIMA (humedad, viento, etc.)
+   =========================================
+*/
+
+/* Tarjetas individuales para cada detalle meteorológico
+   - Estructura vertical y centrada
+   - Fondo ligeramente contrastado
+   - Transición para efecto hover
+*/
+.weather-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+/* Efecto hover para las tarjetas de detalle
+   - Elevación suave y sombra
+*/
+.weather-detail:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ícono representativo del tipo de detalle
+   - Tamaño grande y color primario
+   - Espacio inferior para separar del valor
+*/
+.weather-detail__icon {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+}
+
+/* Valor numérico del detalle meteorológico
+   - Tamaño medio y negritas para destacar
+*/
+.weather-detail__value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin-bottom: 0.3rem;
+}
+
+/* Etiqueta descriptiva del tipo de detalle
+   - Texto pequeño y color más claro
+*/
+.weather-detail__label {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+/* =========================================
+   PRONÓSTICO DEL CLIMA
+   =========================================
+*/
+
+/* Sección de pronóstico para próximos días
+   - Separación superior del contenido anterior
+*/
+.forecast {
+    margin-top: 3rem;
+}
+
+/* Título de la sección de pronóstico
+   - Tamaño y color destacados
+   - Línea decorativa inferior
+*/
+.forecast__title {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Línea decorativa bajo el título
+   - Ancho limitado con color primario
+*/
+.forecast__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-primary);
+}
+
+/* Contenedor de tarjetas de pronóstico
+   - Grid adaptable según espacio disponible
+*/
+.forecast__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Tarjetas individuales para cada día de pronóstico
+   - Fondo blanco con sombra y bordes redondeados
+   - Estructura vertical centrada
+   - Transición para efecto hover
+*/
+.forecast-card {
+    background-color: white;
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+}
+
+/* Efecto hover para tarjetas de pronóstico
+   - Elevación y sombra más pronunciada
+*/
+.forecast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Nombre del día en tarjeta de pronóstico
+   - Negritas y color destacado
+*/
+.forecast-card__day {
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: var(--color-secondary);
+}
+
+/* Ícono representativo del clima para ese día
+   - Tamaño grande y color primario
+*/
+.forecast-card__icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-primary);
+}
+
+/* Contenedor de temperaturas máxima y mínima
+   - Disposición horizontal con espacio entre valores
+*/
+.forecast-card__temp {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+}
+
+/* Temperatura máxima destacada
+   - Negritas y color cálido/rojo
+*/
+.forecast-card__temp-max {
+    font-weight: bold;
+    color: var(--color-danger);
+}
+
+/* Temperatura mínima
+   - Color frío/azul para contraste visual
+*/
+.forecast-card__temp-min {
+    color: var(--color-info);
+}
+
+/* =========================================
+   BÚSQUEDA DE UBICACIONES
+   =========================================
+*/
+
+/* Contenedor principal para búsqueda de ubicaciones
+   - Fondo blanco con sombra y bordes redondeados
+*/
+.location {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+/* Título de la sección de ubicaciones
+   - Tamaño medio y línea decorativa inferior
+*/
+.location__title {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Línea decorativa bajo el título
+   - Ancho limitado con color primario
+*/
+.location__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* Formulario de búsqueda de ubicaciones
+   - Estructura horizontal flexible
+*/
+.location__form {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+/* Campo de entrada para búsqueda
+   - Ocupa espacio disponible con bordes suaves
+   - Transición para efecto focus
+*/
+.location__input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    outline: none;
+    transition: var(--transition);
+}
+
+/* Estado focus del campo de búsqueda
+   - Borde de color primario para destacar
+*/
+.location__input:focus {
+    border-color: var(--color-primary);
+}
+
+/* Botón de búsqueda
+   - Color primario con texto blanco
+   - Bordes redondeados solo en lado derecho
+*/
+.location__button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Estado hover del botón de búsqueda
+   - Color más oscuro para indicar interactividad
+*/
+.location__button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Lista de ubicaciones guardadas o resultados
+   - Sin viñetas para limpieza visual
+*/
+.location-list {
+    list-style: none;
+}
+
+/* Elementos individuales de la lista de ubicaciones
+   - Padding uniforme con borde inferior
+   - Cursor pointer para indicar seleccionable
+   - Transición para efecto hover
+*/
+.location-list__item {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+
+/* Elimina borde del último elemento
+   - Mantiene consistencia visual
+*/
+.location-list__item:last-child {
+    border-bottom: none;
+}
+
+/* Estado hover de los elementos de ubicación
+   - Cambio sutil de fondo para indicar interactividad
+*/
+.location-list__item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estado activo/seleccionado de ubicación
+   - Fondo ligeramente coloreado
+   - Borde lateral para destacar la selección
+*/
+.location-list__item--active {
+    background-color: #f0f7ff;
+    border-left: 3px solid var(--color-primary);
+}
+
+/* Ícono para cada ubicación en la lista
+   - Color primario y espacio adecuado
+*/
+.location-list__icon {
+    color: var(--color-primary);
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+/* Contenedor del texto de cada ubicación
+   - Ocupa espacio disponible
+*/
+.location-list__text {
+    flex: 1;
+}
+
+/* Nombre de la ciudad
+   - Negritas y color destacado
+*/
+.location-list__city {
+    font-weight: bold;
+    color: var(--color-secondary);
+}
+
+/* Nombre del país
+   - Texto más pequeño y color claro
+*/
+.location-list__country {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+}
+
+/* =========================================
+   DATOS HISTÓRICOS DEL CLIMA
+   =========================================
+*/
+
+/* Contenedor principal para datos históricos
+   - Fondo blanco con sombra y bordes redondeados
+*/
+.historical {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+/* Título de la sección de datos históricos
+   - Tamaño medio y línea decorativa inferior
+*/
+.historical__title {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Línea decorativa bajo el título
+   - Ancho limitado con color primario
+*/
+.historical__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* Pestañas para filtrar datos históricos
+   - Estructura horizontal con borde inferior
+*/
+.historical__tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.5rem;
+}
+
+/* Pestañas individuales
+   - Padding uniforme y cursor pointer
+   - Posición relativa para línea decorativa
+   - Transición para efectos interactivos
+*/
+.historical__tab {
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    position: relative;
+}
+
+/* Línea decorativa bajo cada pestaña
+   - Inicialmente invisible (ancho 0)
+   - Se expande en hover y estado activo
+*/
+.historical__tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: var(--transition);
+}
+
+/* Estado hover de las pestañas
+   - Cambio de color para indicar interactividad
+*/
+.historical__tab:hover {
+    color: var(--color-primary);
+}
+
+/* Estado activo de las pestañas
+   - Color primario para destacar selección
+*/
+.historical__tab--active {
+    color: var(--color-primary);
+}
+
+/* Línea decorativa completa en pestaña activa
+   - Indica visualmente la pestaña seleccionada
+*/
+.historical__tab--active::after {
+    width: 100%;
+}
+
+/* Contenedor para el contenido de datos históricos
+   - Altura fija para gráficos
+*/
+.historical__content {
+    height: 250px;
+    position: relative;
+}
+
+/* Gráfico de datos históricos
+   - Ocupa todo el espacio disponible
+   - Fondo suave y bordes redondeados
+*/
+.historical__chart {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    border-radius: var(--radius-sm);
+}
+
+/* =========================================
+   ALERTAS METEOROLÓGICAS
+   =========================================
+*/
+
+/* Sección de alertas activas
+   - Separación superior del contenido anterior
+*/
+.alerts {
+    margin-top: 3rem;
+}
+
+/* Título de la sección de alertas
+   - Tamaño y color destacados
+   - Línea decorativa inferior
+*/
+.alerts__title {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Línea decorativa bajo el título
+   - Ancho limitado con color primario
+*/
+.alerts__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-primary);
+}
+
+/* Tarjetas individuales para cada alerta
+   - Fondo blanco con sombra y bordes redondeados
+   - Borde lateral colorido según tipo de alerta
+   - Estructura horizontal para ícono y contenido
+*/
+.alert-card {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    border-left: 5px solid var(--color-warning);
+}
+
+/* Variantes de color según tipo de alerta */
+.alert-card--warning {
+    border-left-color: var(--color-warning);
+}
+
+.alert-card--danger {
+    border-left-color: var(--color-danger);
+}
+
+.alert-card--info {
+    border-left-color: var(--color-info);
+}
+
+/* Ícono de la alerta
+   - Tamaño grande y margen derecho
+   - Color según tipo de alerta
+*/
+.alert-card__icon {
+    margin-right: 1rem;
+    color: var(--color-warning);
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+/* Variantes de color del ícono según tipo de alerta */
+.alert-card--warning .alert-card__icon {
+    color: var(--color-warning);
+}
+
+.alert-card--danger .alert-card__icon {
+    color: var(--color-danger);
+}
+
+.alert-card--info .alert-card__icon {
+    color: var(--color-info);
+}
+
+/* Contenido textual de la alerta
+   - Ocupa espacio disponible
+*/
+.alert-card__content {
+    flex: 1;
+}
+
+/* Título de la alerta
+   - Tamaño medio y color destacado
+*/
+.alert-card__title {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Mensaje descriptivo de la alerta
+   - Tamaño regular y espaciado inferior
+*/
+.alert-card__message {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+/* Pie de la tarjeta con información adicional
+   - Distribución horizontal con alineación vertical
+   - Texto pequeño y color claro
+*/
+.alert-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
+
+/* Timestamp o duración de la alerta
+   - Negritas para destacar
+*/
+.alert-card__time {
+    font-weight: bold;
+}
+
+/* =========================================
+   ESTADOS DE CARGA Y ERROR
+   =========================================
+*/
+
+/* Estado de carga (loading)
+   - Centrado horizontal y vertical
+   - Estructura vertical con spinner y texto
+*/
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+/* Spinner de carga animado
+   - Círculo con borde rotativo
+   - Color primario para destacar
+*/
+.loading__spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--color-primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+/* Animación de rotación para el spinner
+   - Giro completo de 0 a 360 grados
+*/
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Texto de carga
+   - Tamaño medio y color suave
+*/
+.loading__text {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+}
+
+/* Estado de error
+   - Centrado con fondo rosado suave
+   - Borde lateral rojo para destacar
+*/
+.error {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff3f3;
+    border-radius: var(--radius-md);
+    border-left: 5px solid var(--color-danger);
+    margin-bottom: 2rem;
+}
+
+/* Ícono de error
+   - Tamaño grande y color de error
+*/
+.error__icon {
+    font-size: 3rem;
+    color: var(--color-danger);
+    margin-bottom: 1rem;
+}
+
+/* Título del mensaje de error
+   - Tamaño grande y color destacado
+*/
+.error__title {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Descripción del error
+   - Color estándar de texto y margen inferior
+*/
+.error__message {
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+}
+
+/* Botón para reintentar tras un error
+   - Color de error con texto blanco
+   - Bordes redondeados y cursor pointer
+*/
+.error__button {
+    background-color: var(--color-danger);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Estado hover del botón de error
+   - Color más oscuro para indicar interactividad
+*/
+.error__button:hover {
+    background-color: #c0392b;
+}
+
+/* =========================================
+   PIE DE PÁGINA
+   =========================================
+*/
+
+/* Contenedor principal del footer
+   - Fondo oscuro y texto blanco
+   - Separación del contenido principal
+*/
+.footer {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+/* Grid para organizar secciones del footer
+   - Columnas adaptables según espacio disponible
+*/
+.footer__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Secciones individuales del footer
+   - Margen inferior para separación
+*/
+.footer__section {
+    margin-bottom: 1.5rem;
+}
+
+/* Títulos de secciones del footer
+   - Tamaño medio y línea decorativa inferior
+*/
+.footer__title {
+    font-size: 1.2rem;}
